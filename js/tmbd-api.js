@@ -1,47 +1,76 @@
-// ===========================================
-// js/TMBD-api.js - Configuração e Funções da API TMDB (Usando Token V4)
-// ===========================================
-
-// --- VARIÁVEIS GLOBAIS DA API ---
-// Este é o Access Token (v4) que você validou. Ele será usado no cabeçalho 'Authorization'.
-const ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YmExYTA1NTY4NjE1MWU4YzQxYWE0MmE3YzE5YWEyMSIsInZlcnNpb24iOjF9.J_PKKtQZulOVDAQeT06eXt-W5-FHx4z5u5zEzS5OH2I";
+const API_KEY = "9ba1a055686151e8c41aa42a7c19aa21";
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
-// ---------------------------------
 
-/**
- * Função genérica para buscar dados da API do TMDB, usando a autenticação Bearer Token (v4).
- *
- * @param {string} endpointQueryPath O caminho do endpoint TMDB (e.g., "/movie/popular?page=1" ou "/search/multi?query=duna").
- * @returns {Promise<Object>} Os dados JSON da resposta da API.
- */
-async function fetchTMDB(endpointQueryPath) {
-    // A URL final é construída com o endpoint e o idioma, SEM a chave API V3 no parâmetro.
-    // O 'endpointQueryPath' deve incluir a paginação ou busca (ex: /movie/popular?page=1)
-    const url = `${BASE_URL}${endpointQueryPath}&language=pt-BR`; 
-
-    // Opções de requisição:
-    const options = {
-        method: 'GET',
-        headers: {
-            // A autenticação é feita aqui, via cabeçalho HTTP (Bearer Token V4)
-            'Authorization': `Bearer ${ACCESS_TOKEN}`, 
-            'accept': 'application/json'
-        }
-    };
+async function fetchTMDB(path) {
+    const url = `${BASE_URL}${path}${path.includes('?') ? '&' : '?'}api_key=${API_KEY}&language=pt-BR`;
 
     try {
-        const response = await fetch(url, options);
-        
+        const response = await fetch(url);
+
         if (!response.ok) {
-            console.error(`TMDB API Erro: ${response.status} - URL: ${url}`);
-            throw new Error(`TMDB API falhou com status: ${response.status}. Verifique o Access Token (v4).`);
+            console.error(`Erro TMDB ${response.status}:`, url);
+            throw new Error(`TMDB falhou: ${response.status}`);
         }
 
         return response.json();
-
-    } catch (error) {
-        console.error("Erro na operação fetchTMDB (Verifique sua conexão ou token):", error);
-        throw error;
+    } catch (err) {
+        console.error("Erro fetchTMDB():", err);
+        throw err;
     }
+}
+
+async function fetchMovies(page = 1, query = "") {
+    if (query && query.trim().length > 0) {
+        return fetchTMDB(`/search/movie?query=${encodeURIComponent(query)}&page=${page}`);
+    }
+    return fetchTMDB(`/movie/popular?page=${page}`);
+}
+
+async function fetchTopRatedMovies(page = 1) {
+    return fetchTMDB(`/movie/top_rated?page=${page}`);
+}
+
+async function fetchSeries(page = 1, query = "") {
+    if (query && query.trim().length > 0) {
+        return fetchTMDB(`/search/tv?query=${encodeURIComponent(query)}&page=${page}`);
+    }
+    return fetchTMDB(`/tv/popular?page=${page}`);
+}
+
+async function fetchTopRatedSeries(page = 1) {
+    return fetchTMDB(`/tv/top_rated?page=${page}`);
+}
+
+/**
+ * Google Books: busca básica com paginação (maxResults=12)
+ * Retorna um objeto parecido com TMDB: { items: [...], totalItems }
+ */
+async function fetchBooks(page = 1, query = "") {
+    const perPage = 12;
+    const startIndex = (page - 1) * perPage;
+    const q = query && query.trim().length > 0 ? encodeURIComponent(query) : "best+books";
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${q}&startIndex=${startIndex}&maxResults=${perPage}&langRestrict=pt`;
+
+    try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Google Books error ${res.status}`);
+        return res.json(); // items, totalItems
+    } catch (err) {
+        console.error("Erro fetchBooks():", err);
+        return { items: [], totalItems: 0 };
+    }
+}
+
+/* Útil para templates, converte um item do Google Books para formato similar */
+function normalizeBookItem(item) {
+    return {
+        id: item.id,
+        title: item.volumeInfo?.title || "Sem título",
+        release_date: item.volumeInfo?.publishedDate || "—",
+        vote_average: (item.volumeInfo?.averageRating || 0) * 2, // para manter escala 0-10
+        poster_path: item.volumeInfo?.imageLinks?.thumbnail || null,
+        media_type: "book",
+        raw: item
+    };
 }
