@@ -1,0 +1,22 @@
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: #0F0F0F;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.main-header nav a {
+    color: #fff;
+    margin-left: 25px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.main-header nav a:hover {
+    color: #00A8FF;
+}

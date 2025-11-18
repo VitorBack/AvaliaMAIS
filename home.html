@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaRate — Home</title>
+
+    <!-- CSS GLOBAL DO HOME -->
+    <link rel="stylesheet" href="styles/home.css">
+
+    <!-- ÍCONES -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- SWIPER CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body>
+
+    <!-- HEADER PRINCIPAL -->
+    <header class="main-header">
+        <h2 class="logo">MediaRate</h2>
+
+        <nav class="nav-menu">
+            <a href="#" class="active">Início</a>
+            <a href="#">Filmes</a>
+            <a href="#">Séries</a>
+            <a href="#">Livros</a>
+            <a href="#">Favoritos</a>
+        </nav>
+
+        <div class="user-area">
+            <i class='bx bxs-user-circle'></i>
+        </div>
+    </header>
+
+    <!-- BARRA DE BUSCA -->
+    <section class="search-section">
+        <input type="text" placeholder="Buscar filmes, séries ou livros...">
+        <i class='bx bx-search'></i>
+    </section>
+
+    <!-- BOTÕES DE CATEGORIAS -->
+    <section class="categories">
+        <button class="active">Populares</button>
+        <button>Avaliados</button>
+        <button>Lançamentos</button>
+        <button>Livros</button>
+        <button>Filmes</button>
+        <button>Séries</button>
+    </section>
+
+    <!-- SWIPER PARALLAX -->
+    <main>
+        <section class="swiper parallax-slider">
+
+            <div class="parallax-bg"
+                style="background-image:url('https://wallpapercave.com/wp/wp7209436.jpg');"
+                data-swiper-parallax="-23%">
+            </div>
+
+            <div class="swiper-wrapper">
+
+                <!-- SLIDE 1 -->
+                <div class="swiper-slide">
+                    <div class="title" data-swiper-parallax="-100">Oppenheimer</div>
+                    <div class="subtitle" data-swiper-parallax="-200">Filme</div>
+                    <div class="text" data-swiper-parallax="-300">
+                        <p>Um físico brilhante envolvido no Projeto Manhattan.</p>
+                    </div>
+
+                    <div data-swiper-parallax-opacity="0.5">Opacidade dinâmica</div>
+                    <div data-swiper-parallax-scale="0.2">Escala dinâmica</div>
+                </div>
+
+                <!-- SLIDE 2 -->
+                <div class="swiper-slide">
+                    <div class="title" data-swiper-parallax="-100">Duna 2</div>
+                    <div class="subtitle" data-swiper-parallax="-200">Filme</div>
+                    <div class="text" data-swiper-parallax="-300">
+                        <p>Paul Atreides une o povo Fremen contra o Império.</p>
+                    </div>
+
+                    <div data-swiper-parallax-opacity="0.5">Opacidade dinâmica</div>
+                    <div data-swiper-parallax-scale="0.2">Escala dinâmica</div>
+                </div>
+
+                <!-- SLIDE 3 -->
+                <div class="swiper-slide">
+                    <div class="title" data-swiper-parallax="-100">The Batman</div>
+                    <div class="subtitle" data-swiper-parallax="-200">Filme</div>
+                    <div class="text" data-swiper-parallax="-300">
+                        <p>Bruce Wayne enfrenta o Charada em uma Gotham sombria.</p>
+                    </div>
+
+                    <div data-swiper-parallax-opacity="0.5">Opacidade dinâmica</div>
+                    <div data-swiper-parallax-scale="0.2">Escala dinâmica</div>
+                </div>
+
+            </div>
+
+            <!-- CONTROLES -->
+            <div class="swiper-pagination"></div>
+
+        </section>
+    </main>
+
+    <!-- SWIPER JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/swiper-config.js"></script>
+</body>
+</html>

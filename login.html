@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/login.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Avaliçao de mídias</title>
+</head>
+<body>
+    <header></header>
+    <main class="container">
+        <form id="login-form">
+            <h1>Login</h1>
+            <div class="input-box">
+                <input placeholder="Usuário" type="email" required> 
+                <i class="bx bxs-user"></i>
+            </div>
+            <div class="input-box">
+                <input placeholder="Senha" type="password" required>
+                <i class="bx bxs-lock-alt"></i>
+            </div>
+            <div class="remember-forgot">
+                <label>
+                <input type="checkbox">
+                Lembrar senha
+                </label>       
+                <a href="#">Esqueci a senha</a>  
+            </div>
+
+            <button type="submit" class="login">Login</button>
+
+            <div class="register-link">
+                <p>Não tem uma conta? <a href="#" onclick="showRegisterForm()">Cadastre-se</a></p>
+            </div>  
+        </form>
+
+        <form id="register-form" class="hidden">
+            <h1>Cadastro</h1>
+            <div class="input-box">
+                <input placeholder="Usuário" type="email" required> 
+                <i class="bx bxs-user"></i>
+            </div>
+            <div class="input-box">
+                <input placeholder="Nome Completo" type="text" required> 
+                <i class="bx bxs-user-circle"></i>
+            </div>
+            <div class="input-box">
+                <input placeholder="Senha" type="password" required>
+                <i class="bx bxs-lock-alt"></i>
+            </div>
+             <div class="input-box">
+                <input placeholder="Confirmar Senha" type="password" required>
+                <i class="bx bxs-lock"></i>
+            </div>
+            
+            <button type="submit" class="login">Cadastrar</button>
+
+            <div class="register-link">
+                <p>Já tem uma conta? <a href="#" onclick="showLoginForm()">Faça Login</a></p>
+            </div>  
+        </form>
+
+    </main>
+    <footer></footer>
+    <script src="js/login.js"></script>
+</body>
+</html>
