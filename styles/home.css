@@ -1,10 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
 
+/* Variáveis do Global.css (reforçando aqui, mas devem estar no global) */
 :root {
     --primary: #1db954;
     --dark: #111;
     --light: #fff;
     --gray: #aaa;
+    
+    /* Variáveis necessárias para o grid e paginação */
+    --card-background: #1a1a1a; /* Fundo dos cards (igual ao input de busca) */
+    --dark-button-color: #333; /* Cor dos botões inativos */
+    --primary-color: var(--primary); /* Cor ativa */
 }
 
 * {
@@ -77,18 +83,21 @@ body {
     top: 50%;
     transform: translateY(-50%);
     font-size: 23px;
+    cursor: pointer;
 }
 
-/* CATEGORIAS */
+/* CATEGORIAS (Botoes da Home) */
 .categories {
+    width: 100%;
     padding: 20px 40px;
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
 .categories button {
-    padding: 10px 20px;
+    margin: 8px; /* Ajuste para não ter margens tão grandes */
+    padding: 20px 40px;
     background: #1a1a1a;
     color: #fff;
     border: none;
@@ -124,6 +133,7 @@ body {
     padding: 50px;
 }
 
+/* Títulos do Slider/Home */
 .title {
     font-size: 48px;
     font-weight: 700;
@@ -148,4 +158,115 @@ body {
 
 .swiper-pagination-bullet {
     background: #fff !important;
+}
+
+/* ---------------------------------------------------------------- */
+/* --- ESTILOS PARA GRID DE RESULTADOS E PAGINAÇÃO (CATÁLOGO) --- */
+/* ---------------------------------------------------------------- */
+
+/* Centraliza o Título Principal em Filmes/Séries/Livros */
+main h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5em;
+}
+
+/* 1. ESTILO DO CONTAINER DE RESULTADOS (Grid) */
+#results-list.results-grid {
+    display: grid;
+    /* 5 colunas no desktop, mas responsivo em telas menores */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 30px; 
+    padding: 20px 40px; /* Adiciona padding lateral para não colar nas bordas */
+}
+
+/* 2. ESTILO INDIVIDUAL DO CARD */
+.result-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o card (imagem, título, etc.) */
+    text-align: center; /* Centraliza o texto */
+    background-color: var(--card-background); 
+    padding: 15px;
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.result-card:hover {
+    transform: translateY(-8px); /* Efeito de elevação maior */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.result-card img {
+    width: 100%;
+    max-height: 300px; 
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.card-details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 0 5px;
+    font-size: 0.9em;
+    color: var(--gray);
+}
+
+.card-rating {
+    color: var(--primary); /* Destaca a estrela e o rating */
+    font-weight: 600;
+}
+
+.result-card h3 {
+    margin: 5px 0 0;
+    font-size: 1.1em;
+    height: 3.3em; /* Garante que todos os cards tenham a mesma altura */
+    overflow: hidden; /* Esconde texto se for muito longo */
+}
+
+.card-category {
+    font-size: 0.9em;
+    color: var(--gray);
+    margin-top: 5px;
+}
+
+
+/* 3. ESTILO PARA A PAGINAÇÃO */
+#pagination-controls {
+    display: flex;
+    justify-content: center; 
+    margin: 40px 0 80px 0; /* Mais margem na parte inferior */
+    gap: 8px; /* Espaçamento entre os botões */
+    flex-wrap: wrap;
+}
+
+.page-button {
+    background-color: var(--dark-button-color); 
+    color: white;
+    border: 1px solid var(--dark-button-color);
+    padding: 10px 18px;
+    border-radius: 50%; /* Faz o botão ser circular/arredondado */
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    min-width: 45px; /* Tamanho mínimo para caber 10+ */
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-button:hover:not(.active) {
+    background-color: #444; /* Um pouco mais claro no hover */
+    border-color: #444;
+}
+
+.page-button.active {
+    background-color: var(--primary-color); 
+    color: #000;
+    border-color: var(--primary-color);
 }

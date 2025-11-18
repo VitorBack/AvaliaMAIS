@@ -21,11 +21,10 @@
         <h2 class="logo">MediaRate</h2>
 
         <nav class="nav-menu">
-            <a href="#" class="active">Início</a>
-            <a href="#">Filmes</a>
-            <a href="#">Séries</a>
-            <a href="#">Livros</a>
-            <a href="#">Favoritos</a>
+            <a href="home.html" class="active">Início</a>
+            <a href="filmes.html">Filmes</a>
+            <a href="series.html">Séries</a>
+            <a href="livros.html">Livros</a>
         </nav>
 
         <div class="user-area">
@@ -35,22 +34,28 @@
 
     <!-- BARRA DE BUSCA -->
     <section class="search-section">
-        <input type="text" placeholder="Buscar filmes, séries ou livros...">
-        <i class='bx bx-search'></i>
+        <input type="text" id="search-input" placeholder="Buscar filmes, séries ou livros...">
+        <i class='bx bx-search' id="search-icon"></i> 
     </section>
 
-    <!-- BOTÕES DE CATEGORIAS -->
-    <section class="categories">
-        <button class="active">Populares</button>
-        <button>Avaliados</button>
-        <button>Lançamentos</button>
-        <button>Livros</button>
-        <button>Filmes</button>
-        <button>Séries</button>
+    <section class="categories" id="category-filters">
+        <button class="active" data-filter="all">Populares</button>
+        <button data-filter="rated">Avaliados</button>
+        <button data-filter="releases">Lançamentos</button>
+        <button data-filter="book">Livros</button>
+        <button data-filter="movie">Filmes</button>
+        <button data-filter="tv">Séries</button>
     </section>
 
-    <!-- SWIPER PARALLAX -->
-    <main>
+    <section id="search-results" style="padding: 20px; display: none;">
+        <h2>Resultados da Pesquisa:</h2>
+        <div id="results-list" class="results-grid">
+        </div>
+    </section>
+
+
+    <main id="main-content">
+
         <section class="swiper parallax-slider">
 
             <div class="parallax-bg"
@@ -63,7 +68,7 @@
                 <!-- SLIDE 1 -->
                 <div class="swiper-slide">
                     <div class="title" data-swiper-parallax="-100">Oppenheimer</div>
-                    <div class="subtitle" data-swiper-parallax="-200">Filme</div>
+                    <div class="subtitle" data-swiper-parallax="-200">Livro</div>
                     <div class="text" data-swiper-parallax="-300">
                         <p>Um físico brilhante envolvido no Projeto Manhattan.</p>
                     </div>
@@ -75,7 +80,7 @@
                 <!-- SLIDE 2 -->
                 <div class="swiper-slide">
                     <div class="title" data-swiper-parallax="-100">Duna 2</div>
-                    <div class="subtitle" data-swiper-parallax="-200">Filme</div>
+                    <div class="subtitle" data-swiper-parallax="-200">Livro</div>
                     <div class="text" data-swiper-parallax="-300">
                         <p>Paul Atreides une o povo Fremen contra o Império.</p>
                     </div>
@@ -87,7 +92,7 @@
                 <!-- SLIDE 3 -->
                 <div class="swiper-slide">
                     <div class="title" data-swiper-parallax="-100">The Batman</div>
-                    <div class="subtitle" data-swiper-parallax="-200">Filme</div>
+                    <div class="subtitle" data-swiper-parallax="-200">Livro</div>
                     <div class="text" data-swiper-parallax="-300">
                         <p>Bruce Wayne enfrenta o Charada em uma Gotham sombria.</p>
                     </div>
@@ -102,10 +107,16 @@
             <div class="swiper-pagination"></div>
 
         </section>
+
+        
     </main>
 
     <!-- SWIPER JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/swiper-config.js"></script>
+
+    <!-- tmdb JS -->
+    <script src="js/TMBD-api.js"></script> <script src="js/home.js"></script>
+    <script src="js/search-logic.js"></script>
 </body>
 </html>
