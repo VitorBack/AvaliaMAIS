@@ -1,4 +1,6 @@
-const API_KEY = "9ba1a055686151e8c41aa42a7c19aa21";
+require('dotenv').config();
+
+const API_KEY = process.env.API_KEY;
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
