@@ -1,16 +1,15 @@
-/* search-logic.js — novo */
 const searchInput = document.getElementById('search-input');
 const searchIcon = document.getElementById('search-icon');
 
-const resultsArea = document.getElementById('search-results'); // usado na home para mostrar área de busca
-const resultsList = document.getElementById('results-list'); // lista geral (reutilizada em páginas de categoria)
+const resultsArea = document.getElementById('search-results');
+const resultsList = document.getElementById('results-list');
 const isCategoryPage = window.location.pathname.includes('filmes.html') ||
                        window.location.pathname.includes('series.html') ||
                        window.location.pathname.includes('livros.html');
 
 let currentSearchQuery = '';
 let currentSearchPage = 1;
-const PER_PAGE = 12; // conforme decidido
+const PER_PAGE = 12;
 
 document.addEventListener('DOMContentLoaded', () => {
     if (searchIcon) searchIcon.addEventListener('click', handleSearch);
@@ -18,13 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter') handleSearch();
     });
 
-    // Se estivermos na home sem pesquisa, carregue os top 12 de cada mídia
     if (!isCategoryPage) {
         showTopSectionsOnHome();
     }
 });
-
-/* ---------- UI helpers ---------- */
 
 function clearResultsArea() {
     if (resultsList) resultsList.innerHTML = '';
@@ -35,16 +31,12 @@ function showResultsArea() {
     if (resultsArea) resultsArea.style.display = 'block';
 }
 
-/* ---------- HOME behaviour ---------- */
-
 async function showTopSectionsOnHome() {
-    // para home inicial: exibir 3 blocos (Top-rated movies, Top-rated series, Top books)
-    // cria containers dinâmicos em #search-results
     if (!resultsArea) return;
 
     resultsArea.style.display = 'block';
     resultsArea.innerHTML = `
-        <h2>Em alta — Top avaliados</h2>
+        <h2>Em alta – Top avaliados</h2>
         <section id="top-filmes" class="home-section">
             <h3>Filmes</h3>
             <div class="home-grid" id="top-filmes-list"></div>
@@ -61,7 +53,6 @@ async function showTopSectionsOnHome() {
         </section>
     `;
 
-    // Busca Top Rated (12 cada)
     try {
         const [moviesData, seriesData, booksData] = await Promise.all([
             fetchTopRatedMovies(1),
@@ -89,12 +80,9 @@ function renderHomeSection(containerId, items) {
     items.forEach(item => container.appendChild(createMediaCardElement(item)));
 }
 
-/* ---------- SEARCH ---------- */
-
 function handleSearch() {
     const query = searchInput.value.trim();
     if (!query) {
-        // se o usuário limpou a busca, voltar ao estado inicial (home)
         clearResultsArea();
         if (!isCategoryPage) showTopSectionsOnHome();
         return;
@@ -104,12 +92,9 @@ function handleSearch() {
     currentSearchPage = 1;
 
     if (isCategoryPage) {
-        // pesquisa local na página de categoria: somente o tipo atual será buscado por category-page-loader
-        // para manter compatibilidade, disparamos um evento custom que category-page-loader pode ouvir
         const evt = new CustomEvent('category-search', { detail: { query, page: currentSearchPage } });
         document.dispatchEvent(evt);
     } else {
-        // HOME: buscar filmes + series + livros e exibir 3 blocos separados
         searchGlobal(query, currentSearchPage);
     }
 }
@@ -180,9 +165,7 @@ async function searchGlobal(query, page = 1) {
     }
 }
 
-/* ---------- Reutilizáveis: cria elemento DOM do card ---------- */
 function createMediaCardElement(item) {
-    // item pode ser TMDB item (movie/tv) ou objeto normalizado de book
     const title = item.title || item.name || "Sem título";
     const dateStr = (item.release_date || item.first_air_date || item.raw?.volumeInfo?.publishedDate || "—").toString();
     const year = dateStr ? (dateStr.slice(0,4) || "—") : "—";
@@ -206,15 +189,21 @@ function createMediaCardElement(item) {
             </div>
             <h3 class="media-title">${title}</h3>
         </div>
+        <button class="btn-avaliar">
+            <i class='bx bx-star'></i> Avaliar
+        </button>
     `;
-    // detalhe: poderia abrir modal/rota com detalhes ao clicar
-    card.addEventListener('click', () => {
-        // exemplo simples: console.log(item)
-        console.log('clicou em', item);
+    
+    // Ao clicar no botão avaliar, abre o modal
+    const btnAvaliar = card.querySelector('.btn-avaliar');
+    btnAvaliar.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (window.MODAL_AVALIACAO) {
+            window.MODAL_AVALIACAO.abrir(item);
+        }
     });
 
     return card;
 }
 
-/* Exporta criar cartão para category-page-loader (mantendo compatibilidade) */
 window.createMediaCardElement = createMediaCardElement;

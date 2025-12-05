@@ -3,24 +3,46 @@ const API_BASE_URL = 'http://localhost:8000';
 const loginForm = document.getElementById('login-form');
 const registerForm = document.getElementById('register-form');
 
+// ========== FUNÇÕES PARA ALTERNAR ENTRE LOGIN E CADASTRO ==========
+
 function showRegisterForm() {
     loginForm.classList.add('hidden');
     registerForm.classList.remove('hidden');
-    const heading = document.querySelector('.container h1');
-    if (heading) heading.textContent = 'Cadastro';
 }
 
 function showLoginForm() {
     registerForm.classList.add('hidden');
     loginForm.classList.remove('hidden');
-    const heading = document.querySelector('.container h1');
-    if (heading) heading.textContent = 'Login';
 }
+
+// Event listeners para os links
+document.addEventListener('DOMContentLoaded', () => {
+    const showRegisterLink = document.getElementById('show-register-link');
+    const showLoginLink = document.getElementById('show-login-link');
+
+    if (showRegisterLink) {
+        showRegisterLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showRegisterForm();
+        });
+    }
+
+    if (showLoginLink) {
+        showLoginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoginForm();
+        });
+    }
+
+    // Verifica se já está logado
+    if (estaLogado() && window.location.pathname.includes('login.html')) {
+        window.location.href = 'home.html';
+    }
+});
 
 // ========== FUNÇÕES DE ARMAZENAMENTO DE SESSÃO ==========
 
 function salvarSessao(userData) {
-    // Salva dados do usuário logado
     sessionStorage.setItem('usuarioLogado', JSON.stringify(userData));
 }
 
@@ -121,14 +143,6 @@ loginForm.addEventListener("submit", async function (e) {
     }
 });
 
-// ========== VERIFICAR SE JÁ ESTÁ LOGADO ==========
-// Ao carregar a página, redirecionar se já estiver logado
-document.addEventListener('DOMContentLoaded', () => {
-    if (estaLogado() && window.location.pathname.includes('login.html')) {
-        window.location.href = 'home.html';
-    }
-});
-
 // ========== EXPORTAR FUNÇÕES PARA USO GLOBAL ==========
 window.auth = {
     estaLogado,
@@ -136,3 +150,7 @@ window.auth = {
     limparSessao,
     salvarSessao
 };
+
+// Exporta funções para uso em outros contextos (se necessário)
+window.showRegisterForm = showRegisterForm;
+window.showLoginForm = showLoginForm;

@@ -180,6 +180,8 @@ def criar_avaliacao(user_id: int, avaliacao: AvaliacaoCreate):
         return {"message": "Avaliação criada com sucesso", "id": cursor.lastrowid}
     except sqlite3.IntegrityError:
         raise HTTPException(status_code=400, detail="Você já avaliou este item")
+    except Exception:
+        raise HTTPException(status_code=500, detail="Erro interno ao criar avaliação")
     finally:
         conn.close()
 

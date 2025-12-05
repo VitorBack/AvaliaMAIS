@@ -1,6 +1,6 @@
-/* category-page-loader.js — versão atualizada */
+/* category-page-loader.js – versão atualizada com media_type */
 const GOOGLE_BOOKS_BASE_URL = 'https://www.googleapis.com/books/v1/volumes';
-const RESULTS_PER_PAGE = 24; // por página
+const RESULTS_PER_PAGE = 24;
 let currentPage = 1;
 let currentCategory = '';
 let currentEndpoint = '';
@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('category-search', (e) => {
         const q = e.detail.query;
         const p = e.detail.page || 1;
-        // On category pages we search only that type
         searchCategoryOnly(currentCategory, q, p);
     });
 
@@ -63,15 +62,24 @@ async function loadCategoryPage(type, endpoint, page) {
 
         if (type === 'book') {
             const books = await fetchBooks(page, "");
-            results = (books.items || []).map(normalizeBookItem);
+            results = (books.items || []).map(item => ({
+                ...normalizeBookItem(item),
+                media_type: 'book' // Garante que tem media_type
+            }));
             totalPages = Math.ceil((books.totalItems || results.length) / RESULTS_PER_PAGE) || 1;
         } else if (type === 'movie') {
             const data = await fetchMovies(page, "");
-            results = data.results || [];
+            results = (data.results || []).map(item => ({
+                ...item,
+                media_type: 'movie' // Garante que tem media_type
+            }));
             totalPages = Math.ceil((data.total_results || (results.length)) / RESULTS_PER_PAGE) || data.total_pages || 1;
         } else if (type === 'tv') {
             const data = await fetchSeries(page, "");
-            results = data.results || [];
+            results = (data.results || []).map(item => ({
+                ...item,
+                media_type: 'tv' // Garante que tem media_type
+            }));
             totalPages = Math.ceil((data.total_results || (results.length)) / RESULTS_PER_PAGE) || data.total_pages || 1;
         }
 
@@ -81,7 +89,6 @@ async function loadCategoryPage(type, endpoint, page) {
             return;
         }
 
-    
         const sliceStart = 0;
         const itemsToRender = results.slice(sliceStart, RESULTS_PER_PAGE);
 
@@ -106,17 +113,27 @@ async function searchCategoryOnly(type, query, page = 1) {
     try {
         let results = [];
         let totalPages = 1;
+        
         if (type === 'movie') {
             const data = await fetchMovies(page, query);
-            results = data.results || [];
+            results = (data.results || []).map(item => ({
+                ...item,
+                media_type: 'movie'
+            }));
             totalPages = data.total_pages || 1;
         } else if (type === 'tv') {
             const data = await fetchSeries(page, query);
-            results = data.results || [];
+            results = (data.results || []).map(item => ({
+                ...item,
+                media_type: 'tv'
+            }));
             totalPages = data.total_pages || 1;
         } else if (type === 'book') {
             const books = await fetchBooks(page, query);
-            results = (books.items || []).map(normalizeBookItem);
+            results = (books.items || []).map(item => ({
+                ...normalizeBookItem(item),
+                media_type: 'book'
+            }));
             totalPages = Math.ceil((books.totalItems || results.length) / RESULTS_PER_PAGE) || 1;
         }
 

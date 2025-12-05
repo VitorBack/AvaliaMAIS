@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediaRate — Home</title>
+    <title>AvaliaMAIS — Home</title>
 
     <!-- CSS GLOBAL DO HOME -->
     <link rel="stylesheet" href="styles/home.css">
@@ -14,11 +15,12 @@
     <!-- SWIPER CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
+
 <body>
 
     <!-- HEADER PRINCIPAL -->
     <header class="main-header">
-        <h2 class="logo">MediaRate</h2>
+        <h2 class="logo">AvaliaMAIS</h2>
 
         <nav class="nav-menu">
             <a href="home.html" class="active">Início</a>
@@ -35,7 +37,7 @@
     <!-- BARRA DE BUSCA -->
     <section class="search-section">
         <input type="text" id="search-input" placeholder="Buscar filmes, séries ou livros...">
-        <i class='bx bx-search' id="search-icon"></i> 
+        <i class='bx bx-search' id="search-icon"></i>
     </section>
 
     <section class="categories" id="category-filters">
@@ -55,11 +57,13 @@
 
 
     <main id="main-content">
+        <section id="search-results" style="padding: 20px; display: none;">
+            <div id="results-list" class="results-grid"></div>
+        </section>
 
         <section class="swiper parallax-slider">
 
-            <div class="parallax-bg"
-                style="background-image:url('https://wallpapercave.com/wp/wp7209436.jpg');"
+            <div class="parallax-bg" style="background-image:url('https://wallpapercave.com/wp/wp7209436.jpg');"
                 data-swiper-parallax="-23%">
             </div>
 
@@ -108,15 +112,23 @@
 
         </section>
 
-        
+
     </main>
+
+    <script src="js/auth-guard.js"></script>
+    <script src="js/modal-avaliacao.js"></script>
+
+    <!-- CSS do modal e avaliações -->
+    <link rel="stylesheet" href="styles/avaliacoes.css">
 
     <!-- SWIPER JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/swiper-config.js"></script>
 
     <!-- tmdb JS -->
-    <script src="js/TMBD-api.js"></script> <script src="js/home.js"></script>
+    <script src="js/TMBD-api.js"></script>
+    <script src="js/home.js"></script>
     <script src="js/search-logic.js"></script>
 </body>
+
 </html>

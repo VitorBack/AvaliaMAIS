@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AvaliaMAIS – Minhas Avaliações</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/home.css">
+    <link rel="stylesheet" href="styles/avaliacoes.css">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <h2 class="logo">AvaliaMAIS</h2>
+
+        <nav class="nav-menu">
+            <a href="home.html">Início</a>
+            <a href="filmes.html">Filmes</a>
+            <a href="series.html">Séries</a>
+            <a href="livros.html">Livros</a>
+        </nav>
+
+        <div class="user-area">
+            <i class='bx bxs-user-circle'></i>
+        </div>
+    </header>
+
+    <main id="main-content" style="padding: 20px;">
+        <div class="page-header">
+            <h1>Minhas Avaliações</h1>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Todas</button>
+                <button class="filter-btn" data-filter="movie">Filmes</button>
+                <button class="filter-btn" data-filter="tv">Séries</button>
+                <button class="filter-btn" data-filter="book">Livros</button>
+            </div>
+        </div>
+
+        <section id="avaliacoes-section">
+            <div id="loading" class="loading">
+                <i class='bx bx-loader-alt bx-spin'></i>
+                <p>Carregando avaliações...</p>
+            </div>
+
+            <div id="avaliacoes-list" class="avaliacoes-grid"></div>
+
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <i class='bx bx-star'></i>
+                <h2>Você ainda não fez nenhuma avaliação</h2>
+                <p>Explore filmes, séries e livros e comece a avaliar!</p>
+                <a href="home.html" class="btn-primary">Explorar Mídias</a>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/auth-guard.js"></script>
+    <script src="js/modal-avaliacao.js"></script>
+    <script src="js/avaliacoes.js"></script>
+</body>
+
+</html>
