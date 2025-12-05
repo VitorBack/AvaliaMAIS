@@ -65,9 +65,6 @@ const AUTH_GUARD = {
                         <a href="avaliacoes.html">
                             <i class='bx bx-star'></i> Minhas Avaliações
                         </a>
-                        <a href="favoritos.html">
-                            <i class='bx bx-heart'></i> Meus Favoritos
-                        </a>
                         <a href="#" id="logout-button">
                             <i class='bx bx-log-out'></i> Sair
                         </a>
