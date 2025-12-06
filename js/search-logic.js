@@ -35,23 +35,23 @@ async function showTopSectionsOnHome() {
     if (!resultsArea) return;
 
     resultsArea.style.display = 'block';
-    resultsArea.innerHTML = `
-        <h2>Em alta – Top avaliados</h2>
-        <section id="top-filmes" class="home-section">
-            <h3>Filmes</h3>
-            <div class="home-grid" id="top-filmes-list"></div>
-        </section>
+    // resultsArea.innerHTML = `
+    //     <h2>Em alta – Top avaliados</h2>
+    //     <section id="top-filmes" class="home-section">
+    //         <h3>Filmes</h3>
+    //         <div class="home-grid" id="top-filmes-list"></div>
+    //     </section>
 
-        <section id="top-series" class="home-section">
-            <h3>Séries</h3>
-            <div class="home-grid" id="top-series-list"></div>
-        </section>
+    //     <section id="top-series" class="home-section">
+    //         <h3>Séries</h3>
+    //         <div class="home-grid" id="top-series-list"></div>
+    //     </section>
 
-        <section id="top-livros" class="home-section">
-            <h3>Livros</h3>
-            <div class="home-grid" id="top-livros-list"></div>
-        </section>
-    `;
+    //     <section id="top-livros" class="home-section">
+    //         <h3>Livros</h3>
+    //         <div class="home-grid" id="top-livros-list"></div>
+    //     </section>
+    // `;
 
     try {
         const [moviesData, seriesData, booksData] = await Promise.all([

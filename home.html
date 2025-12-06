@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AvaliaMAIS — Home</title>
+    <title>AvaliaMAIS – Home</title>
 
     <!-- CSS GLOBAL DO HOME -->
     <link rel="stylesheet" href="styles/home.css">
@@ -40,14 +40,14 @@
         <i class='bx bx-search' id="search-icon"></i>
     </section>
 
-    <section class="categories" id="category-filters">
+    <!-- <section class="categories" id="category-filters">
         <button class="active" data-filter="all">Populares</button>
         <button data-filter="rated">Avaliados</button>
         <button data-filter="releases">Lançamentos</button>
         <button data-filter="book">Livros</button>
         <button data-filter="movie">Filmes</button>
         <button data-filter="tv">Séries</button>
-    </section>
+    </section> -->
 
     <section id="search-results" style="padding: 20px; display: none;">
         <h2>Resultados da Pesquisa:</h2>
@@ -55,64 +55,53 @@
         </div>
     </section>
 
-
     <main id="main-content">
-        <section id="search-results" style="padding: 20px; display: none;">
-            <div id="results-list" class="results-grid"></div>
+        <!-- TOP 10 FILMES -->
+        <section class="top10-section">
+            <h2 class="section-title">
+                <i class='bx bxs-movie'></i> Top 10 Filmes
+            </h2>
+            <div class="swiper top10-slider" id="top10-filmes">
+                <div class="swiper-wrapper">
+                    <!-- Os cards serão inseridos dinamicamente aqui -->
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
         </section>
 
-        <section class="swiper parallax-slider">
-
-            <div class="parallax-bg" style="background-image:url('https://wallpapercave.com/wp/wp7209436.jpg');"
-                data-swiper-parallax="-23%">
+        <!-- TOP 10 SÉRIES -->
+        <section class="top10-section">
+            <h2 class="section-title">
+                <i class='bx bxs-tv'></i> Top 10 Séries
+            </h2>
+            <div class="swiper top10-slider" id="top10-series">
+                <div class="swiper-wrapper">
+                    <!-- Os cards serão inseridos dinamicamente aqui -->
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
+        </section>
 
-            <div class="swiper-wrapper">
-                <section id="search-results" style="padding: 20px; display: block;"></section>
-                <!-- SLIDE 1 -->
-                <div class="swiper-slide">
-                    <div class="title" data-swiper-parallax="-100">Oppenheimer</div>
-                    <div class="subtitle" data-swiper-parallax="-200">Livro</div>
-                    <div class="text" data-swiper-parallax="-300">
-                        <p>Um físico brilhante envolvido no Projeto Manhattan.</p>
-                    </div>
-
-                    <div data-swiper-parallax-opacity="0.5">Opacidade dinâmica</div>
-                    <div data-swiper-parallax-scale="0.2">Escala dinâmica</div>
+        <!-- TOP 10 LIVROS -->
+        <section class="top10-section">
+            <h2 class="section-title">
+                <i class='bx bxs-book'></i> Top 10 Livros
+            </h2>
+            <div class="swiper top10-slider" id="top10-livros">
+                <div class="swiper-wrapper">
+                    <!-- Os cards serão inseridos dinamicamente aqui -->
                 </div>
-
-                <!-- SLIDE 2 -->
-                <div class="swiper-slide">
-                    <div class="title" data-swiper-parallax="-100">Duna 2</div>
-                    <div class="subtitle" data-swiper-parallax="-200">Livro</div>
-                    <div class="text" data-swiper-parallax="-300">
-                        <p>Paul Atreides une o povo Fremen contra o Império.</p>
-                    </div>
-
-                    <div data-swiper-parallax-opacity="0.5">Opacidade dinâmica</div>
-                    <div data-swiper-parallax-scale="0.2">Escala dinâmica</div>
-                </div>
-
-                <!-- SLIDE 3 -->
-                <div class="swiper-slide">
-                    <div class="title" data-swiper-parallax="-100">The Batman</div>
-                    <div class="subtitle" data-swiper-parallax="-200">Livro</div>
-                    <div class="text" data-swiper-parallax="-300">
-                        <p>Bruce Wayne enfrenta o Charada em uma Gotham sombria.</p>
-                    </div>
-
-                    <div data-swiper-parallax-opacity="0.5">Opacidade dinâmica</div>
-                    <div data-swiper-parallax-scale="0.2">Escala dinâmica</div>
-                </div>
-
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
+        </section>
 
+       
             <!-- CONTROLES -->
             <div class="swiper-pagination"></div>
-
         </section>
-
-
     </main>
 
     <script src="js/auth-guard.js"></script>
